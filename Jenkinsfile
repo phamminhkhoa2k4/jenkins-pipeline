@@ -1,14 +1,15 @@
-pipeline{
+pipeline {
     agent {
         docker {
+            label 'master'          // node có SSH credential tới host remote
             image 'node:18-alpine'
-            args '-u root'
+            registryCredentialsId 'ssh-credential-id' // credential SSH đã tạo
         }
     }
-    stages{
-        stage('Building ....'){
-            steps{
-                echo 'Building .....'
+    stages {
+        stage('Build') {
+            steps {
+                sh 'node -v'
             }
         }
     }
